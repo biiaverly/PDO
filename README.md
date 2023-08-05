@@ -567,7 +567,7 @@ $stmt->execute();
 
 // The query will use the constant value 30 for the age parameter
 ```
-In the example above, the bindValue method sets the value of the parameter :age to a constant value of 30. This value remains the same each time the statement is executed.
+IgetAvailableDriversn the example above, the bindValue method sets the value of the parameter :age to a constant value of 30. This value remains the same each time the statement is executed.
 
 This method is useful when you need to pass a fixed value to the query as a parameter, regardless of any changes in the script.
 

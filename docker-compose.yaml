@@ -1,11 +1,19 @@
 version: '3.8'
 services:
     db:
-        container_name: mysql
-        hostname: "mysqlBia"
+        container_name: db
+        hostname: db
         build:
             context: .
             dockerfile: ./docker/db/db.dockerfile
+            args:
+            - ENV=${ENV}
+            - PROJECT_NAME=${PROJECT_NAME}
+            - WWWUSER=${WWWUSER:-1000}
+            - WWWGROUP=${WWWGROUP:-1000}
+            - DB_DATABASE=${DB_DATABASE}
+            - DB_PASSWORD=${DB_PASSWORD}
+            - DB_USERNAME=${DB_USERNAME}
         command: --innodb-use-native-aio=0
         restart: always
         ports:
@@ -14,8 +22,4 @@ services:
             - ./docker/db/dbdata:/var/lib/mysql
             - ./docker/db:/docker-entrypoint-initdb.d
         environment:
-            - DB_HOST=mysqlBia
-            - PORT=3301
-            - DB_USER=root
-            - DB_PASSWORD=root
-            - DB_DATABASE=PDO
+            - MYSQL_ROOT_PASSWORD=root
